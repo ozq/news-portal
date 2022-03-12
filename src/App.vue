@@ -1,13 +1,20 @@
 <template>
   <div class="app">
     <v-header class="app_header">
-      <search-input @input="filterNews"/>
+      <search-input @input="search"/>
     </v-header>
     <main class="app_main">
-      <section id="latest-news">
-        <h2>Latest News</h2>
-        <news-grid :news="news"/>
-      </section>
+      <p class="app_message app_loader" v-if="loading">Loading news...</p>
+      <transition name="fade">
+        <section class="section" id="latest-news" v-if="loading === false">
+          <div class="section_title-wrapper">
+            <h2 class="section_title">Latest News</h2>
+            <sorting @select="sort"/>
+          </div>
+          <p v-show="filteredNews.length === 0" class="app_message">News not found<br>👀</p>
+          <news-grid :news="filteredNews"/>
+        </section>
+      </transition>
     </main>
     <v-footer class="app_footer"/>
   </div>
@@ -18,6 +25,7 @@
   import VFooter from '@/components/VFooter';
   import NewsGrid from '@/components/NewsGrid';
   import SearchInput from '@/components/SearchInput';
+  import Sorting from '@/components/Sorting';
 
   import { mapState } from 'vuex';
 
@@ -26,20 +34,48 @@
     metaInfo: {
       title: 'News Portal',
     },
+    data() {
+      return {
+        filteredNews: [],
+      };
+    },
     components: {
       VHeader,
       VFooter,
       NewsGrid,
       SearchInput,
+      Sorting,
     },
     computed: {
       ...mapState([
         'news',
+        'loading',
       ]),
     },
     methods: {
-      filterNews() {
-        // TODO: filter logic...
+      search(value) {
+        const query = value.toLowerCase();
+        if (query.length === 0) {
+          this.filteredNews = this.news;
+        }
+        this.filteredNews = this.news.filter(item => {
+          return item.title.toLowerCase().includes(query) || item.text.toLowerCase().includes(query);
+        });
+      },
+      sort(type) {
+       this.filteredNews = this.filteredNews.sort((left, right) => {
+          return type === 'asc' ?
+            left.published_at > right.published_at ? -1 : 1 :
+            right.published_at > left.published_at ? -1 : 1;
+        });
+      },
+    },
+    watch: {
+      news: {
+        immediate: true,
+        handler(news) {
+          this.filteredNews = news;
+        },
       },
     },
     created() {
@@ -74,6 +110,23 @@
       grid-column-start: 1;
       margin-top: 93px;
     }
+    &_message {
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.5;
+    }
+    &_loader {
+      @keyframes loading {
+        50% {
+          opacity: 0.35;
+        }
+      }
+      animation: loading 2s infinite;
+    }
     @media (max-width: $breakpoint-tablet) {
       --layout-x-padding: 35px;
     }
@@ -81,12 +134,30 @@
       --layout-x-padding: 60px;
     }
     &_header, &_main {
-      box-sizing: border-box;
+      box-sizing: content-box;
       width: 100%;
       padding-left: var(--layout-x-padding);
       padding-right: var(--layout-x-padding);
+      margin-left: auto;
+      margin-right: auto;
       max-width: var(--layout-width);
-      margin: 0 auto;
+    }
+  }
+  .section {
+    height: 100%;
+    &_title-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    &_title {
+      font-family: $font-family-secondary;
+      font-size: 36px;
+      margin: 0;
+      @media (max-width: $breakpoint-tablet) {
+        font-size: 24px;
+      }
     }
   }
 </style>

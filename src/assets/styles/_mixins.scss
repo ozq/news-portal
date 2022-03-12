@@ -4,3 +4,29 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+@mixin alternative-scroll() {
+  $color-thumb: $color-primary-20;
+  $color-thumb-active: $color-primary-40;
+  scrollbar-color: transparent $color-thumb-active;
+  scrollbar-width: thin;
+  &::-webkit-scrollbar {
+    $size: 8px;
+    height: $size;
+    width: $size;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $color-thumb;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: $color-thumb-active;
+  }
+}
+
+@mixin button-reset() {
+  background: none;
+  border: none;
+}

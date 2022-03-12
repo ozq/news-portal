@@ -6,9 +6,13 @@
         ref="input"
         type="search"
         class="search-area_input"
-        placeholder="Search news..."/>
+        placeholder="Search news..."
+        :value="value"
+        @input="$emit('input', $event.target.value)"/>
     </transition>
-    <icon-search class="search-area_icon" @click="toggle"/>
+    <button class="search-area_button" @click="toggle">
+      <icon-search/>
+    </button>
   </div>
 </template>
 
@@ -18,6 +22,12 @@
   export default {
     components: {
       IconSearch,
+    },
+    props: {
+      value: {
+        type: String,
+        default: '',
+      },
     },
     data() {
       return {
@@ -48,8 +58,8 @@
         width: 55%;
       }
     }
-    &_icon {
-      cursor: pointer;
+    &_button {
+      @include button-reset();
       margin-left: 16px;
     }
   }

@@ -12,7 +12,9 @@ export default new Vuex.Store({
   },
   mutations: {
     SET_NEWS(state, items) {
-      state.news = items || [];
+      state.news = (items || []).sort((left, right) => {
+        return left.published_at < right.published_at ? 1 : -1;
+      });
     },
     SET_LOADING(state, value) {
       state.loading = Boolean(value);
