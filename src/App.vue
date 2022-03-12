@@ -1,28 +1,39 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <v-header>
+      <input placeholder="Search news..."/>
+    </v-header>
+    <main>
+      <section id="latest-news">
+        <h2>Latest News</h2>
+        <news-grid :news="news"/>
+      </section>
+    </main>
+    <v-footer/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+  import VHeader from '@/components/VHeader';
+  import VFooter from '@/components/VFooter';
+  import NewsGrid from '@/components/NewsGrid';
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  import { mapState } from 'vuex';
+
+  export default {
+    name: 'App',
+    components: {
+      VHeader,
+      VFooter,
+      NewsGrid,
+    },
+    computed: {
+      ...mapState([
+        'news',
+      ]),
+    },
+    created() {
+      this.$store.dispatch('fetchNews');
+    },
+  };
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
