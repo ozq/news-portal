@@ -72,11 +72,12 @@
     &_footer {
       grid-area: footer;
       grid-column-start: 1;
+      margin-top: 93px;
     }
-    @media (max-width: 768px) {
+    @media (max-width: $breakpoint-tablet) {
       --layout-x-padding: 35px;
     }
-    @media (min-width: 768px) {
+    @media (min-width: $breakpoint-tablet) {
       --layout-x-padding: 60px;
     }
     &_header, &_main {

@@ -2,7 +2,7 @@ module.exports = {
   css: {
     loaderOptions: {
       scss: {
-        additionalData: '@import "~@/assets/styles/config.scss";',
+        additionalData: '@import "~@/assets/styles/config.scss"; @import "~@/assets/styles/mixins.scss";',
       },
     },
   },
