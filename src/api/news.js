@@ -9,7 +9,7 @@ const MOCK_DATA = [
   { id: 8, image: 'https://images.unsplash.com/photo-1638913976381-5b8ed66c36d6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80', title: 'News Title Lorem Ipsum Dolor Sit Amet', published_at: 1623445200, source: 'CNN Indonesia', text: 'The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph, for quick jigs vex! Fox nymphs grab quick-jived waltz. Brick quiz whangs jumpy veldt fox. Bright vixens jump; dozy fowl quack. Quick wafting zephyrs vex bold Jim. Quick zephyrs blow, vexing daft Jim.' },
 ];
 
-const MOCK_TIMEOUT = 3000;
+const MOCK_TIMEOUT = 2500;
 
 export default {
   fetch() {

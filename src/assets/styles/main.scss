@@ -8,6 +8,10 @@ body {
   @include alternative-scroll();
 }
 
+html, body {
+  height: 100%;
+}
+
 a {
   color: $color-primary;
 }

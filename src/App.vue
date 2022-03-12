@@ -86,7 +86,6 @@
 
 <style lang="scss" scoped>
   .app {
-    --layout-width: 1170px;
     display: grid;
     grid-template-areas:
       "header"
@@ -96,19 +95,18 @@
       auto
       1fr
       auto;
-    min-height: 100vh;
+    height: 100%;
     &_header {
       grid-area: header;
       margin-bottom: 40px;
     }
     &_main {
       grid-area: main;
-      overflow: hidden;
     }
     &_footer {
       grid-area: footer;
       grid-column-start: 1;
-      margin-top: 93px;
+      margin-top: 10vh;
     }
     &_message {
       height: 100%;
@@ -127,6 +125,8 @@
       }
       animation: loading 2s infinite;
     }
+    --layout-x-padding: 0;
+    --layout-width: 1170px;
     @media (max-width: $breakpoint-tablet) {
       --layout-x-padding: 35px;
     }
@@ -134,13 +134,13 @@
       --layout-x-padding: 60px;
     }
     &_header, &_main {
-      box-sizing: content-box;
+      box-sizing: border-box;
       width: 100%;
       padding-left: var(--layout-x-padding);
       padding-right: var(--layout-x-padding);
       margin-left: auto;
       margin-right: auto;
-      max-width: var(--layout-width);
+      max-width: calc(var(--layout-width) + var(--layout-x-padding) * 2);
     }
   }
   .section {
