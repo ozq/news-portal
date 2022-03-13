@@ -72,7 +72,7 @@
         });
       },
       sort(type) {
-       this.visibleNews = this.visibleNews.sort((left, right) => {
+        this.visibleNews = this.visibleNews.sort((left, right) => {
           return type === 'desc' ?
             left.published_at > right.published_at ? -1 : 1 :
             right.published_at > left.published_at ? -1 : 1;

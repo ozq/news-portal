@@ -12,10 +12,10 @@
         class="sorting-list"
         ref="list">
         <li v-for="option in options"
-            :key="option.type"
-            class="sorting-list_item"
-            :class="{ '-active': value === option.type }"
-            @click="onSelect(option)">
+          :key="option.type"
+          class="sorting-list_item"
+          :class="{ '-active': value === option.type }"
+          @click="onSelect(option)">
           {{ option.label }}
         </li>
       </ul>
