@@ -27,13 +27,15 @@
 <style lang="scss" scoped>
   .news-grid {
     --column-count: 4;
+    --column-gap: 30px;
     --row-gap: 72px;
     display: grid;
-    column-gap: 30px;
+    column-gap: var(--column-gap);
     row-gap: var(--row-gap);
     grid-template-columns: repeat(var(--column-count), 1fr);
     @media (max-width: $breakpoint-tablet) {
       --column-count: 3;
+      --column-gap: 20px;
       --row-gap: 48px;
     }
     @media (max-width: $breakpoint-mobile) {
