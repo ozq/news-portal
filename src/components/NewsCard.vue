@@ -70,7 +70,7 @@
       object-fit: cover;
       width: inherit;
       max-width: 100%;
-      height: auto;
+      height: inherit;
       transition: transform 0.35s ease-in-out;
       &:hover {
         transform: scale(1.3);
