@@ -9,7 +9,7 @@
         <section class="section" id="latest-news" v-if="loading === false">
           <div class="section_title-wrapper">
             <h2 class="section_title">Latest News</h2>
-            <sorting @select="sort"/>
+            <sorting v-model="sorting" @input="sort"/>
           </div>
           <p v-show="filteredNews.length === 0" class="app_message">News not found<br>👀</p>
           <news-grid :news="filteredNews"/>
@@ -38,6 +38,7 @@
     },
     data() {
       return {
+        sorting: 'desc',
         filteredNews: [],
       };
     },
@@ -66,7 +67,7 @@
       },
       sort(type) {
        this.filteredNews = this.filteredNews.sort((left, right) => {
-          return type === 'asc' ?
+          return type === 'desc' ?
             left.published_at > right.published_at ? -1 : 1 :
             right.published_at > left.published_at ? -1 : 1;
         });

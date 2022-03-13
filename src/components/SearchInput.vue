@@ -64,7 +64,7 @@
     &_input {
       margin-left: auto;
       max-width: 100%;
-      @media (max-width: 420px) {
+      @media (max-width: $breakpoint-mobile) {
         width: 55%;
       }
     }

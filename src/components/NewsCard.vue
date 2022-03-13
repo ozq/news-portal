@@ -123,6 +123,9 @@
         font-size: 8px;
         margin-bottom: 8px;
       }
+      &_source {
+        @include truncate();
+      }
     }
   }
 </style>

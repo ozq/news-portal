@@ -1,7 +1,10 @@
 <template>
   <div class="sorting-wrapper">
-    <button class="sorting-wrapper_button">
-      <icon-sort @click="toggle"/>
+    <button class="sorting-button" @click="toggle">
+      <span v-if="value" class="sorting-button_label">
+        {{ value === 'asc' ? 'Oldest' : 'Newest' }}
+      </span>
+      <icon-sort/>
     </button>
     <transition name="fade">
       <ul
@@ -11,7 +14,8 @@
         <li v-for="option in options"
             :key="option.type"
             class="sorting-list_item"
-            @click="$emit('select', option.type)">
+            :class="{ '-active': value === option.type }"
+            @click="onSelect(option)">
           {{ option.label }}
         </li>
       </ul>
@@ -27,10 +31,16 @@
       return {
         opened: false,
         options: [
-          { type: 'asc', label: 'Newest to oldest' },
-          { type: 'desc', label: 'Oldest to newest' },
+          { type: 'desc', label: 'Newest to oldest' },
+          { type: 'asc', label: 'Oldest to newest' },
         ],
       };
+    },
+    props: {
+      value: {
+        type: String,
+        default: 'desc',
+      },
     },
     components: {
       IconSort,
@@ -46,6 +56,9 @@
         }
         this.opened = false;
       },
+      onSelect(option) {
+        this.$emit('input', option.type);
+      },
     },
     created() {
       document.addEventListener('click', this.onGlobalClick);
@@ -58,10 +71,24 @@
 
 <style lang="scss" scoped>
   .sorting-wrapper {
-    display: inline-block;
+    display: flex;
     position: relative;
-    &_button {
-      @include reset-button();
+    align-items: center;
+    height: 24px;
+  }
+  .sorting-button {
+    @include reset-button();
+    display: inline-flex;
+    align-items: center;
+    max-height: 100%;
+    &_label {
+      font-weight: 700;
+      font-family: $font-family-secondary;
+      margin-right: 16px;
+      @media (max-width: $breakpoint-mobile) {
+        font-size: 14px;
+        margin-right: 8px;
+      }
     }
   }
   .sorting-list {
@@ -83,7 +110,7 @@
       border-bottom: solid 1px $color-primary-20;
       color: $color-primary-40;
       transition: color 0.15s ease-in-out;
-      &:hover {
+      &.-active, &:hover {
         color: $color-primary;
       }
       &:last-child {
