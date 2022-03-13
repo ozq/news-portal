@@ -12,9 +12,7 @@ Vue.config.productionTip = false;
 Vue.prototype.$appName = 'News Portal';
 Vue.prototype.$api = API;
 
-Vue.use(VueMeta, {
-  refreshOnceOnNavigation: true,
-});
+Vue.use(VueMeta);
 
 new Vue({
   store,

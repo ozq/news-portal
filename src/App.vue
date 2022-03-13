@@ -32,7 +32,9 @@
   export default {
     name: 'App',
     metaInfo: {
-      title: 'News Portal',
+      titleTemplate: function (subTitle) {
+        return subTitle ? `${subTitle} — ${this.$appName}` : this.$appName;
+      },
     },
     data() {
       return {
@@ -99,6 +101,12 @@
     &_header {
       grid-area: header;
       margin-bottom: 40px;
+      @media (max-width: $breakpoint-tablet) {
+        margin-bottom: 16px;
+      }
+      @media (max-width: $breakpoint-mobile) {
+        margin-bottom: 8px;
+      }
     }
     &_main {
       grid-area: main;

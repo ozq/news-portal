@@ -36,7 +36,8 @@
       IconSort,
     },
     methods: {
-      toggle() {
+      toggle(event) {
+        event.stopPropagation();
         this.opened = !this.opened;
       },
       onGlobalClick(event) {
@@ -57,14 +58,14 @@
 
 <style lang="scss" scoped>
   .sorting-wrapper {
+    display: inline-block;
     position: relative;
     &_button {
-      @include button-reset();
+      @include reset-button();
     }
   }
   .sorting-list {
-    list-style-type: none;
-    margin: 0;
+    @include reset-list();
     position: absolute;
     top: 32px;
     right: 0;
@@ -75,10 +76,16 @@
     border-radius: 8px;
     border: solid 1px $color-primary-20;
     &_item {
+      cursor: pointer;
       user-select: none;
       font-family: $font-family-secondary;
       padding: 8px 0;
       border-bottom: solid 1px $color-primary-20;
+      color: $color-primary-40;
+      transition: color 0.15s ease-in-out;
+      &:hover {
+        color: $color-primary;
+      }
       &:last-child {
         border-bottom: none;
       }

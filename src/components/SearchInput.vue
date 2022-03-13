@@ -7,8 +7,7 @@
         type="search"
         class="search-area_input"
         placeholder="Search news..."
-        :value="value"
-        @input="$emit('input', $event.target.value)"/>
+        @input="onInput"/>
     </transition>
     <button class="search-area_button" @click="toggle">
       <icon-search/>
@@ -18,6 +17,7 @@
 
 <script>
   import IconSearch from '@/assets/icons/search.svg';
+  import _throttle from 'lodash/throttle';
 
   export default {
     components: {
@@ -28,10 +28,15 @@
         type: String,
         default: '',
       },
+      delay: {
+        type: Number,
+        default: 250,
+      },
     },
     data() {
       return {
         opened: false,
+        onInput: null,
       };
     },
     methods: {
@@ -43,6 +48,11 @@
           });
         }
       },
+    },
+    created() {
+      this.onInput = _throttle((...args) => {
+        this.$emit('input', args[0].target.value);
+      }, this.delay);
     },
   };
 </script>
@@ -59,7 +69,7 @@
       }
     }
     &_button {
-      @include button-reset();
+      @include reset-button();
       margin-left: 16px;
     }
   }

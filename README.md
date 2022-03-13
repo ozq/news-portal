@@ -1,4 +1,7 @@
-# news-portal
+# News Portal
+
+## Demo
+### https://zealous-almeida-5b14fe.netlify.app
 
 ## Project setup
 ```

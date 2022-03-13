@@ -26,7 +26,12 @@
   }
 }
 
-@mixin button-reset() {
+@mixin reset-button() {
   background: none;
   border: none;
+}
+
+@mixin reset-list() {
+  list-style-type: none;
+  margin: 0;
 }
