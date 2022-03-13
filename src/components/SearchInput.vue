@@ -9,7 +9,10 @@
         placeholder="Search news..."
         @input="onInput"/>
     </transition>
-    <button class="search-area_button" @click="toggle">
+    <button
+      class="search-area_button"
+      aria-label="Toggle Search"
+      @click="toggle">
       <icon-search/>
     </button>
   </div>

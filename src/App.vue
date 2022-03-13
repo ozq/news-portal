@@ -32,6 +32,12 @@
   export default {
     name: 'App',
     metaInfo: {
+      htmlAttrs: {
+        lang: 'en',
+      },
+      meta: [
+        { name: 'description', content: 'Latest news from around the world' },
+      ],
       titleTemplate: function (subTitle) {
         return subTitle ? `${subTitle} — ${this.$appName}` : this.$appName;
       },
