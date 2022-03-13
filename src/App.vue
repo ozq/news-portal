@@ -11,8 +11,8 @@
             <h2 class="section_title">Latest News</h2>
             <sorting v-model="sorting" @input="sort"/>
           </div>
-          <p v-show="filteredNews.length === 0" class="app_message">News not found<br>👀</p>
-          <news-grid :news="filteredNews"/>
+          <p v-show="visibleNews.length === 0" class="app_message">News not found<br>👀</p>
+          <news-grid :news="visibleNews"/>
         </section>
       </transition>
     </main>
@@ -45,7 +45,7 @@
     data() {
       return {
         sorting: 'desc',
-        filteredNews: [],
+        visibleNews: [],
       };
     },
     components: {
@@ -65,14 +65,14 @@
       search(value) {
         const query = value.toLowerCase();
         if (query.length === 0) {
-          this.filteredNews = this.news;
+          this.visibleNews = this.news;
         }
-        this.filteredNews = this.news.filter(item => {
+        this.visibleNews = this.news.filter(item => {
           return item.title.toLowerCase().includes(query) || item.text.toLowerCase().includes(query);
         });
       },
       sort(type) {
-       this.filteredNews = this.filteredNews.sort((left, right) => {
+       this.visibleNews = this.visibleNews.sort((left, right) => {
           return type === 'desc' ?
             left.published_at > right.published_at ? -1 : 1 :
             right.published_at > left.published_at ? -1 : 1;
@@ -83,7 +83,7 @@
       news: {
         immediate: true,
         handler(news) {
-          this.filteredNews = news;
+          this.visibleNews = news.slice();
         },
       },
     },
