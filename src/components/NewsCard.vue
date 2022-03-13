@@ -5,7 +5,10 @@
         <img
           class="news-card_image"
           :src="data.image"
-          :alt="data.title">
+          :alt="data.title"
+          loading="lazy"
+          width="460px"
+          height="300px">
       </figure>
       <h3 class="news-card_title">{{ data.title }}</h3>
     </a>
@@ -66,7 +69,8 @@
       margin-bottom: 16px;
       object-fit: cover;
       width: inherit;
-      height: inherit;
+      max-width: 100%;
+      height: auto;
       transition: transform 0.35s ease-in-out;
       &:hover {
         transform: scale(1.3);
