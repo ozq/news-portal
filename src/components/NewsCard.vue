@@ -48,9 +48,6 @@
 
 <style lang="scss" scoped>
   .news-card {
-    a {
-      text-decoration: none;
-    }
     &_image-wrapper {
       margin-bottom: 16px;
       width: 100%;
@@ -80,7 +77,6 @@
       font-size: 24px;
       line-height: 1.33;
       margin-bottom: 16px;
-      text-decoration: none;
       @media (max-width: $breakpoint-tablet) {
         font-size: 18px;
       }
@@ -108,7 +104,6 @@
       }
     }
     &_link {
-      text-decoration: none;
       display: block;
       color: $color-primary;
       &:hover {
